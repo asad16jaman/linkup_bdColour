@@ -11,6 +11,11 @@
     <!-- Favicons -->
     <!-- <link href="assets/img/favicon.png" rel="icon"> -->
     <!-- <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon"> -->
+     <link
+      rel="icon"
+      href="{{ asset('assets/admin/img/titleicon.svg') }}" 
+      type="image/x-icon"
+    />
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -62,9 +67,14 @@
     <script src="{{ asset('assets/user/vendor/glightbox/js/glightbox.min.js') }}"></script>
     <script src="{{ asset('assets/user/vendor/purecounter/purecounter_vanilla.js') }}"></script>
     <script src="{{ asset('assets/user/vendor/swiper/swiper-bundle.min.js') }}"></script>
+    <!-- Bootstrap Notify -->
+     <script src="{{ asset('assets/admin/js/core/jquery-3.7.1.min.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/plugin/bootstrap-notify/bootstrap-notify.min.js') }}"></script>
 
     <!-- Main JS File -->
     <script src="{{ asset('assets/user/js/main.js') }}"></script>
+
+    @stack('script')
 
 </body>
 

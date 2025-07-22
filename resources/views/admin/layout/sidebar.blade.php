@@ -45,7 +45,7 @@
               <li class="nav-item {{ ($page=='service') ? 'active' : "" }}">
                 <a href="{{ route('admin.category') }}">
                   <i class="fas fa-concierge-bell"></i>
-                  <p>Service</p>
+                  <p>Category</p>
                  
                 </a>
               </li>
@@ -53,7 +53,7 @@
               <li class="nav-item {{ ($page == 'project') ? 'active' : '' }}">
                 <a href="{{ route('admin.product') }}">
                   <i class="fas fa-project-diagram"></i>
-                  <p>Project</p>
+                  <p>Product</p>
                  
                 </a>
               </li>
@@ -88,9 +88,9 @@
               </li>
 
               <li class="nav-item {{ ($page=='client') ? 'active' : ''}}">
-                <a href="{{ route('admin.client') }}">
+                <a href="{{ route('admin.delear') }}">
                   <i class="fas fa-handshake"></i>
-                  <p>Clients</p>
+                  <p>Dealer</p>
                   <!-- <span class="badge badge-success">4</span> -->
                 </a>
               </li>
@@ -112,6 +112,7 @@
                   
                 </a>
               </li>
+
               <li class="nav-item {{ ($page=='about') ? 'active' : '' }}">
                 <a href="{{ route('admin.about') }}">
                   <i class="fas fa-info-circle"></i>

@@ -27,7 +27,7 @@ class CategoryController extends Controller
         }
         ;
 
-        return view('admin.service', compact('allCategories', 'editCategory'));
+        return view('admin.category', compact('allCategories', 'editCategory'));
     }
 
 

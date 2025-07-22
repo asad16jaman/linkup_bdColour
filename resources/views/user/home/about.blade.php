@@ -17,17 +17,9 @@
           <div class="col-lg-6 content" data-aos="fade-up" data-aos-delay="200">
             <h3>{{ $about->title }}</h3>
             <p class="fst-italic">
-              {{ $about->about }}
+              {!! htmlspecialchars_decode($about->about) !!}
             </p>
-            <!-- <ul>
-              <li><i class="bi bi-check2-all"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo consequat.</span></li>
-              <li><i class="bi bi-check2-all"></i> <span>Duis aute irure dolor in reprehenderit in voluptate velit.</span></li>
-              <li><i class="bi bi-check2-all"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</span></li>
-            </ul> -->
-            <!-- <p>
-              Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-              velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident
-            </p> -->
+            
           </div>
         </div>
 

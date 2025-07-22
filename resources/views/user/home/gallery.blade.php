@@ -42,12 +42,12 @@
           </script>
           <div class="swiper-wrapper align-items-center">
             @foreach ($gallery as $glry)
-              <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="assets/img/gallery/gallery-1.jpg"><img src="{{ asset('storage/'.$glry->img) }}" class="img-fluid" alt=""></a></div>
+              <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="{{ asset('storage/'.$glry->img) }}"><img src="{{ asset('storage/'.$glry->img) }}" class="img-fluid" alt=""></a></div>
 
             @endforeach
 
             @foreach ($gallery as $glry)
-              <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="assets/img/gallery/gallery-1.jpg"><img src="{{ asset('storage/'.$glry->img) }}" class="img-fluid" alt=""></a></div>
+              <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="{{ asset('storage/'.$glry->img) }}"><img src="{{ asset('storage/'.$glry->img) }}" class="img-fluid" alt=""></a></div>
             @endforeach
             
           </div>

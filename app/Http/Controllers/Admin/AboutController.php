@@ -12,7 +12,9 @@ class AboutController extends Controller
     //
 
     public function index(){
+
         $about = About::all()->first();
+
         return view("admin.about", compact(['about']));
     }
 
@@ -20,16 +22,17 @@ class AboutController extends Controller
 
         $request->validate([
             'title'=> 'required',
-            'about'=> 'required',
+            'about'=> ['required', 'regex:/^(?!<p><br><\/p>$).*/'],
             'video'=> 'required',
         ]);
         
-         $data = $request->only(['title', 'about','video']);
-         $about = About::all()->first();
-        if ($about) {
-            //user edit section is hare
+         $data = $request->only(['title','video','about']);
+         
+         $about = About::first();
 
+        if ($about) {
             
+            //user edit section is hare
 
             if ($request->hasFile('picture')) {
 
@@ -41,6 +44,9 @@ class AboutController extends Controller
                 $path = $request->file('picture')->store('about');
                 $data['picture'] = $path;
             }
+
+            // return response()->json($data);
+
             About::where('id', '=', $about->id)->update($data);
            
             // 

@@ -66,7 +66,8 @@ class HomeController extends Controller
 
         $data = $request->only(['name','subject','email','message']);
         Contact::create($data);
-        return back();
+        
+        return back()->with('success',"Message Successfully sand...");
 
     }
 

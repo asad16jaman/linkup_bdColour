@@ -3,6 +3,7 @@
 @section('title', 'Admin Page')
 
 @section('style')
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
     <style>
         .table>tbody>tr>td {
             padding: 0px !important;
@@ -102,15 +103,10 @@
                         </div>
 
                         <div class="row mb-2 mt-2">
-                            <div class="col-md-12 col-12">
-                                
-                                <textarea class="form-control @error('about') is-invalid
-                                @enderror" name="about" placeholder="" rows="9">{{ $about ? $about->about : "" }}</textarea>
-
-                                @error('about')
-                                            <p class="text-danger">{{ $message }}</p>
-                                @enderror
-                            </div>
+                            
+                            <label for="long_Description">about :</label>
+                            <textarea name="about" class="form-control"  id="description">{{ $about ? $about->about : "" }}</textarea>
+                                    
                         </div>
 
                         <div class="d-flex justify-content-end">
@@ -124,8 +120,18 @@
 @endsection
 
     @push('script')
+        <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
     
         <script>
+
+              //for text editor start script
+
+                ClassicEditor
+                .create(document.querySelector('#description'))
+                .catch(error => {
+                        console.error('CKEditor Error:', error);
+                });
+            //for text editor end
 
 
             const imageInput = document.getElementById('imageInput');

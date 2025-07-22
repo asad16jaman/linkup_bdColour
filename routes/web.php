@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\ClientController;
 use App\Http\Controllers\admin\CompanyController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\DelearController;
 use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\PhotoGalleryController;
 use App\Http\Controllers\Admin\ProductController;
@@ -34,19 +35,6 @@ Route::get("/contact",[HomeController::class,"contact"])->name("contact");
 // Route::get("/teams",[HomeController::class,"getTeam"])->name("team");
 // Route::get("/testimonial",[HomeController::class,"testimonial"])->name("testimonial");
 // Route::get("/fqa",[HomeController::class,"fqaTemplate"])->name("fqa");
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -92,9 +80,9 @@ Route::group(['prefix'=> '/admin','middleware'=>'checkAdminAuth','as'=>'admin.']
 
 
     //Service url hare
-    Route::get("/service/{id?}",[CategoryController::class,"index"])->name("category");
-    Route::post("/service/{id?}",[CategoryController::class,"store"])->name("category");
-    Route::post("/service/{id}/delete",[CategoryController::class,"destroy"])->name("category.delete");
+    Route::get("/category/{id?}",[CategoryController::class,"index"])->name("category");
+    Route::post("/category/{id?}",[CategoryController::class,"store"])->name("category");
+    Route::post("/category/{id}/delete",[CategoryController::class,"destroy"])->name("category.delete");
 
 
     // Product url hare
@@ -120,18 +108,23 @@ Route::group(['prefix'=> '/admin','middleware'=>'checkAdminAuth','as'=>'admin.']
 
 
     //client url hare
-    Route::get('/clients/{id?}',[ClientController::class,'index'])->name('client');
-    Route::post('/clients/{id?}',[ClientController::class,'store'])->name('client');
-    Route::post('/client/{id}/delete',[ClientController::class,'destroy'])->name('client.delete');
+    // Route::get('/clients/{id?}',[ClientController::class,'index'])->name('client');
+    // Route::post('/clients/{id?}',[ClientController::class,'store'])->name('client');
+    // Route::post('/client/{id}/delete',[ClientController::class,'destroy'])->name('client.delete');
 
     //about url hare
     Route::get('/about',[AboutController::class,'index'])->name('about');
     Route::post('/about',[AboutController::class,'store'])->name('about');
 
-    //about faq hare
+    // faq hare
     Route::get('/faq',[FaqController::class,'index'])->name('faq');
     Route::post('/faq',[FaqController::class,'store'])->name('faq');
      Route::post('/faq/{id}',[FaqController::class,'destroy'])->name('faq.delete');
+
+    //dealer faq hare
+    Route::get('/delear/{id?}',[DelearController::class,'index'])->name('delear');
+    Route::post('/delear/{id?}',[DelearController::class,'store'])->name('delear');
+    Route::post('/delear/{id}/delete',[DelearController::class,'destroy'])->name('delear.delete');
 
     //Contact url hare
     Route::get('/contact',[ContactController::class,'index'])->name('message');

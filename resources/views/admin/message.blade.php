@@ -55,7 +55,7 @@
                             <div class="table-responsive">
                                 <div id="basic-datatables_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
 
-                                    <div class="row">
+                                    <div class="row " style="min-height:350px">
                                         <div class="col-sm-12">
                                             <table id="basic-datatables"
                                                 class="display table table-striped table-hover dataTable" role="grid"

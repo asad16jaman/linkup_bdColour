@@ -46,7 +46,7 @@
 
             <div class="card mb-1">
                 <div class="card-header pt-1 pb-0">
-                    <h4 class="text-center">Create Service</h4>
+                    <h4 class="text-center">Create Product Category</h4>
                 </div>
                 <form method="post" enctype="multipart/form-data">
                     @csrf
@@ -59,7 +59,7 @@
                                 <div class="row mb-2">
                                     <div class="col-md-3 col-12">
                                         <div class="">
-                                            <label for="email2">Service Name :</label>
+                                            <label for="email2">Category Name :</label>
                                             
                                         </div>
                                     </div>

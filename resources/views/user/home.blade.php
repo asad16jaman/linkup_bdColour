@@ -48,11 +48,10 @@
           @include('user.home.gallery',compact(['gallery']))
      <!-- testimonial section start hare  -->
 
-     
-
-
 
   </main>
 
 
 @endsection
+
+ 
