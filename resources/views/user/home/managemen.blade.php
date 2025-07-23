@@ -4,7 +4,7 @@
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
         <h2>Managemen</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+        
       </div><!-- End Section Title -->
 
       <div class="container">
@@ -13,7 +13,7 @@
 
           @foreach ($managements as $management)
 
-            <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
+            <div class="col-lg-3 col-md-6 col-12 d-flex justify-content-around align-items-stretch" data-aos="fade-up" data-aos-delay="100">
               <div class="team-member">
                 <div class="member-img">
                   

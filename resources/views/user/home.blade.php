@@ -4,6 +4,13 @@
      home page
 @endsection
 
+@section('style')
+     <style>
+          .hero .container {
+               background-color: #ffffffb8;
+          }
+     </style>
+@endsection
 
 
 @section('pagenave')
@@ -21,23 +28,25 @@
 
 
      <!-- service category section start hare  -->
-          @include('user.home.service')
+          @include('user.home.service',['categories' => $categories])
      <!-- service category section start hare  -->
 
-     <!-- Call To Action Section  -->
-          @include('user.home.call_action')
-     <!-- Call To Action Section -->
+     
 
      <!-- About Section -->
           @include('user.home.about',compact(['about']))
      <!-- About Section -->
 
+     <!-- Call To Action Section  -->
+          @include('user.home.call_action')
+     <!-- Call To Action Section -->
+
      <!-- service2 section start hare  -->
-          @include('user.home.service2',['frompage'=>'home'])
+          @include('user.home.service2',['products'=>$products,'frompage' => 'home'])
      <!-- service2 section start hare  -->
 
      <!-- testimonial section start hare  -->
-          @include('user.home.testimonial')
+          <!-- include('user.home.testimonial') -->
      <!-- testimonial section start hare  -->
 
      <!-- management section start hare  -->

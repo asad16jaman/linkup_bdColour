@@ -33,7 +33,7 @@
 @endsection
 
 @section('pageside')
-  @include('admin.layout.sidebar',['page' => 'team'])
+  @include('admin.layout.sidebar',['page' => 'web'])
 @endsection
 
 

@@ -35,27 +35,84 @@
                    <p>Dashboard</p>
                 </a>
               </li>
-              <li class="nav-item {{ ($page=='slider') ? "active" : '' }}">
-                <a href="{{ route('admin.slider') }}">
-                  <i class="fas fa-sliders-h"></i>
-                  <p>Slider</p>
-                 
+              
+            
+
+              
+
+              <li class="nav-item {{ ($page == 'web') ? 'active' : "" }}">
+                <a data-bs-toggle="collapse" href="#web">
+                  <i class="fas fa-images"></i>
+                  <p>Web Content</p>
+                  <span class="caret"></span>
                 </a>
-              </li>
-              <li class="nav-item {{ ($page=='service') ? 'active' : "" }}">
-                <a href="{{ route('admin.category') }}">
-                  <i class="fas fa-concierge-bell"></i>
-                  <p>Category</p>
-                 
-                </a>
+                <div class="collapse" id="web">
+                  <ul class="nav nav-collapse">
+                    <li>
+                      <a href="{{ route('admin.slider') }}" style="padding: 5px 24px !important">
+                        
+                        <p class="sub-item">Slider</p>
+                      
+                      </a>
+                    </li>
+
+                    <li>
+                      <a href="{{ route('admin.management') }}" style="padding: 5px 24px !important">
+                      
+                        <p class="sub-item">Management</p>
+                      </a>
+                    </li>
+
+                    @can('viewAny' ,Auth()->user()) 
+                    <li class="nav-item" >
+                      <a href="{{ route('admin.users') }}" style="padding: 5px 24px !important">
+                       
+                        <p class="sub-item">Users</p>
+                        
+                      </a>
+                    </li>
+                    @endcan
+
+
+                    <!-- <li>
+                      <a href="">
+                        <span class="sub-item">Video Gallery</span>
+                      </a>
+                    </li> -->
+                  </ul>
+                </div>
               </li>
 
-              <li class="nav-item {{ ($page == 'project') ? 'active' : '' }}">
-                <a href="{{ route('admin.product') }}">
+              <li class="nav-item {{ ($page == 'product') ? 'active' : "" }}">
+                <a data-bs-toggle="collapse" href="#productss">
                   <i class="fas fa-project-diagram"></i>
                   <p>Product</p>
-                 
+                  <span class="caret"></span>
                 </a>
+                <div class="collapse" id="productss">
+                  <ul class="nav nav-collapse">
+                    <li>
+                      <a href="{{ route('admin.category') }}" style="padding: 0px 24px !important">
+                       
+                        <p class="sub-item">Category</p>
+                      
+                      </a>
+                    </li>
+
+                    <li>
+                      <a href="{{ route('admin.product') }}" style="padding: 5px 24px !important">
+                        
+                        <p class="sub-item">Product</p>
+                      
+                      </a>
+                    </li>
+                    <!-- <li>
+                      <a href="">
+                        <span class="sub-item">Video Gallery</span>
+                      </a>
+                    </li> -->
+                  </ul>
+                </div>
               </li>
               
               <li class="nav-item {{ ($page == 'gallery') ? 'active' : "" }}">
@@ -67,7 +124,7 @@
                 <div class="collapse" id="sidebarLayouts">
                   <ul class="nav nav-collapse">
                     <li>
-                      <a href="{{ route('admin.photogallery') }}">
+                      <a href="{{ route('admin.photogallery') }}" style="padding: 5px 24px !important">
                         <span class="sub-item">Photo Gallery</span>
                       </a>
                     </li>
@@ -80,10 +137,11 @@
                 </div>
               </li>
               
-              <li class="nav-item {{ ($page == 'team') ? 'active' : "" }}">
-                <a href="{{ route('admin.management') }}">
-                  <i class="fas fa-users"></i>
-                  <p>Management</p>
+              <li class="nav-item {{ ($page=='area') ? 'active' : ''}}">
+                <a href="{{ route('admin.area') }}">
+                  <i class="fas fa-handshake"></i>
+                  <p>Area</p>
+                  <!-- <span class="badge badge-success">4</span> -->
                 </a>
               </li>
 
@@ -95,15 +153,7 @@
                 </a>
               </li>
 
-              @can('viewAny' ,Auth()->user()) 
-              <li class="nav-item {{ ($page=='user') ? 'active' : '' }}">
-                <a href="{{ route('admin.users') }}">
-                   <i class="fas fa-user-friends"></i>
-                  <p>Users</p>
-                  
-                </a>
-              </li>
-              @endcan
+              
               
               <li class="nav-item {{ ($page=='company') ? 'active' : '' }}">
                 <a href="{{ route('admin.company') }}">

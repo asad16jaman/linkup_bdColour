@@ -39,7 +39,7 @@ class PhotoGalleryController extends Controller
     {
         $request->validate([
            
-            'img' => "required|image|mimes:jpeg,jpg,png,gif,webp,svg|max:2048"
+            'img' => "required|image|mimes:jpeg,jpg,png,gif,webp,svg"
         ]);
 
         $data = $request->only(['title', 'description']);

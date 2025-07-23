@@ -40,7 +40,7 @@
     <div class="container-fluid bg-breadcrumb">
             <div class="bg-breadcrumb-single"></div>
             <div class="container text-center py-3" style="max-width: 900px;">
-                <h1 class="text-white  mb-4 wow fadeInDown" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInDown;">All Product</h1>
+                <h1 class="text-white  mb-4 wow fadeInDown" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInDown;">Product</h1>
                 <ol class="breadcrumb justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInDown;">
                     <li class="breadcrumb-item text-white"><a href="{{ route('home') }}">Home</a></li>
                     
@@ -50,14 +50,45 @@
     </div>
     
 
-     <!-- service2 section start hare  -->
-          @include('user.home.service2',['frompage'=>'product','products'=>$products])
-     <!-- service2 section start hare  -->
+     <!-- Service Details Section -->
+    <section id="service-details" class="service-details section">
+
+      <div class="container">
+
+        <div class="row gy-4">
+
+          
+
+          <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
+            <div><img style="width:736px;height:500;object-fit:cover" src="{{ $product->picture ?  asset('storage/'.$product->picture) : asset('assets/user/img/services.jpg') }}" alt="" class="img-fluid services-img"></div>
+            <div>
+                <h3>Product Detail</h3>
+                {!!   $product->logn_description !!}
+            </div>
+          </div>
+
+          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="services-list">
+              <a href="#" class="active">Product : {{ $product->name }}</a>
+              <a href="#">Category :{{ $product->category->name }}</a>
+              
+            </div>
+
+            
+            <p>
+                <h4>Detail Summary : </h4>
+                <p>{{ $product->description }}</p>
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section><!-- /Service Details Section -->
       
 
-     <!-- testimonial section start hare  -->
-          
-     <!-- testimonial section start hare  -->
+   
 
     
 

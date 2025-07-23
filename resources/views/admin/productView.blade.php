@@ -64,7 +64,7 @@
 @endsection
 
 @section('pageside')
-      @include('admin.layout.sidebar', ['page' => 'project'])
+      @include('admin.layout.sidebar', ['page' => 'product'])
 @endsection
 
 @section('bodyContent')
@@ -75,7 +75,7 @@
 
             <div class="card mb-1">
                 <div class="card-header pt-1 pb-0">
-                    <h4 class="text-center">Create Project</h4>
+                    <h4 class="text-center">Create Product</h4>
                 </div>
                 <form method="post" id="productForm" enctype="multipart/form-data">
                     @csrf
@@ -205,7 +205,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header p-2">
-                            <h5 class="card-title ">ALL Services</h5>
+                            <h5 class="card-title ">ALL Product</h5>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -235,7 +235,7 @@
                                                         <th style="width: 35.875px;">Image</th>
                                                         <th style="width: 214.469px;">Name</th>
                                                         <th style="width: 214.469px;">Description</th>
-                                                        <th style="width: 214.469px;">Long Des.</th>
+                                                        <th style="width: 214.469px;">Price</th>
                                                         <th style="width: 101.219px;">Category</th>
 
                                                         <th style="width: 81.375px;">Action</th>
@@ -254,7 +254,7 @@
                                                         </td>
                                                         <td>{{ $product->name }}</td>
                                                         <td>{{ substr($product->description, 0, 50) }}...</td>
-                                                        <td>{{ substr($product->logn_description, 0, 50) }}...</td>
+                                                        <td>{{ $product->price }}</td>
 
                                                         <td>{{ $product->category->name }}</td>
 

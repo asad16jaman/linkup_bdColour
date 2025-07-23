@@ -31,8 +31,8 @@
                         <li><a href="{{ route('home') }}#management">Management</a></li>
                         <li class="dropdown"><a href="#"><span>Delerlist</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                             <ul>
-                                <li><a href="#">Delerlist 2</a></li>
-                                <li><a href="#">Delerlist 3</a></li>
+                                <li><a href="#">Dealer Request Form</a></li>
+                                <li><a href="#">Dealer Form</a></li>
                             </ul>
                             </li>
 

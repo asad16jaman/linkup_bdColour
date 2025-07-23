@@ -33,17 +33,17 @@ class SliderController extends Controller
     public function store(Request $request, ?int $id = null)
     {
 
-        $request->validate([
+        $validationRules = [
             "title"=> "required",
             "description"=> "required",
-            'img' => "required|image|mimes:jpeg,jpg,png,gif,webp,svg|max:2048"
-        ]);
+        ];
+        
 
+        if($id == null || $request->hasFile('img')){
+            $validationRules['img'] = "required|image|mimes:jpeg,jpg,png,gif,webp,svg|dimensions:min_width=600,min_height=200,ratio=3/1";
+        }
 
-
-     
-
-
+        $request->validate($validationRules);
 
         $data = $request->only(['title', 'description']);
         if ($id != null) {

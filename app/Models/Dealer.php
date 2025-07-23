@@ -9,4 +9,9 @@ class Dealer extends Model
     //
 
     protected $guarded = [];
+
+    function areas(){
+
+        return $this->hasMany(Area::class)->select(['id','name']);
+    }
 }

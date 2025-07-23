@@ -1,4 +1,4 @@
-<footer id="footer" class="footer light-background">
+<footer id="footer" class="footer" style="background: #98dee1">
 
     <div class="container footer-top">
       <div class="row gy-4">
@@ -7,27 +7,27 @@
             <span class="sitename">Medicio</span>
           </a>
           <div class="footer-contact pt-3">
-            <p>A108 Adam Street</p>
-            <p>New York, NY 535022</p>
-            <p class="mt-3"><strong>Phone:</strong> <span>+1 5589 55488 55</span></p>
-            <p><strong>Email:</strong> <span>info@example.com</span></p>
+            <p>{{ $company->address }}</p>
+            
+            <p class="mt-3"><strong>Phone:</strong> <span>{{ $company->phone }}</span></p>
+            <p><strong>Email:</strong> <span>{{ $company->email }}</span></p>
           </div>
           <div class="social-links d-flex mt-4">
-            <a href=""><i class="bi bi-twitter-x"></i></a>
-            <a href=""><i class="bi bi-facebook"></i></a>
-            <a href=""><i class="bi bi-instagram"></i></a>
-            <a href=""><i class="bi bi-linkedin"></i></a>
+            <a href="{{ $company->whatsapp }}"><i class="bi bi-whatsapp"></i></a>
+            <a href="{{ $company->facebook }}"><i class="bi bi-facebook"></i></a>
+            <a href="{{ $company->instagram }}"><i class="bi bi-instagram"></i></a>
+            <a href="{{ $company->linkdin }}"><i class="bi bi-linkedin"></i></a>
           </div>
         </div>
 
         <div class="col-lg-3 col-md-3 footer-links">
           <h4>Useful Links</h4>
           <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About us</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Terms of service</a></li>
-            <li><a href="#">Privacy policy</a></li>
+            <li><a href="{{ route('home') }}">Home</a></li>
+            <li><a href="{{ route('home') }}#about">About us</a></li>
+            <li><a href="{{ route('home') }}#service">Product</a></li>
+            <li><a href="">Delear Form</a></li>
+            <li><a href="{{ route('contact') }}">Contact</a></li>
           </ul>
         </div>
 
@@ -44,19 +44,15 @@
 
         <div class="col-lg-2 col-md-3 footer-links">
           <h4>Hic solutasetp</h4>
-          <ul>
-            <li><a href="#">Molestiae accusamus iure</a></li>
-            <li><a href="#">Excepturi dignissimos</a></li>
-            <li><a href="#">Suscipit distinctio</a></li>
-            <li><a href="#">Dilecta</a></li>
-            <li><a href="#">Sit quas consectetur</a></li>
-          </ul>
+          <div>
+            {{ $company->footer_text }}
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="container d-flex justify-content-center mt-4">
-      <p>© <span>Copyright</span> <strong class="px-1 sitename">Link Up Technology</strong> <span>All Rights Reserved</span></p>
+    <div class="container-fluid d-flex justify-content-center mt-4" style="background:#1cadb3b8;color:#fff">
+      <p class="pt-3">© <span>Copyright</span> <strong class="px-1 sitename">Link Up Technology</strong> <span>All Rights Reserved</span></p>
      
     </div>
 

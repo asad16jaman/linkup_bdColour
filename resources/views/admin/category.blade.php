@@ -13,7 +13,7 @@
     }
     .profileImg{
         width: auto;
-        height: 100px; 
+        height: 75px; 
         object-fit: cover;
         border: 2px dashed #ccc;
         border-radius: 6px;
@@ -33,7 +33,7 @@
 @endsection
 
 @section('pageside')
-  @include('admin.layout.sidebar',['page' => 'service'])
+  @include('admin.layout.sidebar',['page' => 'product'])
 @endsection
 
 
@@ -110,15 +110,15 @@
                                         <!-- hidden input -->
                                         <input type="file" name="img" id="imageInput" name="image" accept="image/*" style="display: none;">
                                     </div>
-                                    @error('description')
+                                    @error('img')
                                             <p class="text-danger text-center">{{ $message }}</p>
                                         @enderror
                                 </div>
-
-
+                               
+ 
                             </div>
 
-
+<p>Image Size must be : width:260px, height 150px;</p>
                             </div>
                         </div>
 
@@ -134,7 +134,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header p-2">
-                            <h5 class="card-title ">ALL Services</h5>
+                            <h5 class="card-title ">ALL Category</h5>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">

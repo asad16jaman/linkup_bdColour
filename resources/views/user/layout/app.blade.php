@@ -34,6 +34,14 @@
 
     <!-- Main CSS File -->
     <link href="{{ asset('assets/user/css/main.css') }}" rel="stylesheet">
+    <style>
+        .section, .section{
+            padding: 40px 0px;
+        }
+        .section-title{
+            padding-bottom: 30px;
+        }
+    </style>
     @yield('style')
 
 </head>

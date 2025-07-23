@@ -23,25 +23,30 @@ class HomeController extends Controller
         $carousels =Slider::all();
         $about = About::all()->first();
         // $services = Category::all();
-        // $projects = Product::with('image')->get();
+        $products = Product::take(4)->get();
+        $categories = Category::take(4)->get();
         $managements = Management::all();
         $gallery = PhotoGallery::all();
-        $faqs = Faq::all();
-
-        
-        
-        return view("user.home",compact(['carousels','about','managements','gallery','faqs']));
+        return view("user.home",compact(['carousels','about','managements','gallery','categories','products']));
     }
 
+
+    function singleProduct(int $id){
+
+        $product = Product::with('category')->findOrFail($id);
+
+        
+        return view('user.singleproduct',compact(['product']));
+    }
 
     public function products(){
 
         
-        // $services = Category::all();
+        $products = Product::all();
         
         // $clients = Client::all();
 
-        return view('user.product');
+        return view('user.product',compact(['products']));
 
        
     }

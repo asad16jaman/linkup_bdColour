@@ -34,11 +34,22 @@ class CategoryController extends Controller
     public function store(Request $request, ?int $id = null)
     {
 
-        $request->validate([
+        $validationRules = [
             'name'=> 'required',
             'description' => 'required',
-            'img' => "required|image|mimes:jpeg,jpg,png,gif,webp,svg|max:2048"
-        ]);
+        ];
+        
+
+        if($id==null || $request->hasFile('img')){
+            $validationRules['img'] = [
+                                'required',
+                                'image',
+                                'mimes:jpeg,jpg,png,gif,webp,svg',
+                                'dimensions:width=260,height=150'
+                            ];
+        }
+
+        $request->validate($validationRules);
 
 
         $data = $request->only(['description', 'name']);
@@ -89,8 +100,15 @@ class CategoryController extends Controller
         if ($data) {
 
             //unlink image from directory....
-            Storage::delete($data->img);
-            $data->delete();
+            try{
+                if(Storage::exists($data->img)){
+                Storage::delete($data->img);
+                }
+                
+                $data->delete();
+            }catch(\Exception $e){
+                 return redirect()->route('admin.category')->with('danger', 'First delete all Product of this catagory');
+            }
         }
 
         return redirect()->route('admin.category')->with('success', 'Successfully Delete Category');

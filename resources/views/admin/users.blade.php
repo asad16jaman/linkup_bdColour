@@ -33,7 +33,7 @@
 @endsection
 
 @section('pageside')
-  @include('admin.layout.sidebar',['page' => 'user'])
+  @include('admin.layout.sidebar',['page' => 'web'])
 @endsection
 
 @section('bodyContent')

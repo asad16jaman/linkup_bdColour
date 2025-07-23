@@ -31,11 +31,18 @@ class ClientController extends Controller
 
     public function store(Request $request,?int $id=null){
 
-        $request->validate([
+        $validationRules = [
             'name'=> 'required',
             'profession' => 'required',
-            'photo' => "required|image|mimes:jpeg,jpg,png,gif,webp,svg|max:2048"
-        ]);
+        ] ;
+        if($id == null){
+            $validationRules['photo'] = "required|image|mimes:jpeg,jpg,png,gif,webp,svg|max:2048";
+        }
+        $request->validate($validationRules);
+
+        if($id == null){
+
+        }
 
         $data = $request->only(['name', 'note','profession']);
         if ($id != null) {

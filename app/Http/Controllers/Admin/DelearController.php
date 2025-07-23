@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Area;
 use App\Models\Dealer;
 
 use Illuminate\Http\Request;
@@ -19,11 +20,11 @@ class DelearController extends Controller
             $editItem = Dealer::findOrFail($id);
         }
 
-
+        $areas = Area::all();
 
         $alldelears = Dealer::orderBy("id","desc")->paginate(10);
 
-        return view("admin.delear",compact("alldelears","editItem"));
+        return view("admin.delear",compact("alldelears","editItem",'areas'));
     }
 
 
@@ -32,13 +33,11 @@ class DelearController extends Controller
 
         $request->validate([
             "name"=> "required",
-            'phone' => 'required',
+            'phone' => ['required', 'regex:/^01[3-9][0-9]{8}$/'],
             'address' => 'required',
         ]);
 
-        $data = $request->only(['name','phone','address']);
-
-        
+        $data = $request->only(['name','phone','address','area_id']);
 
         try{
 
@@ -58,9 +57,6 @@ class DelearController extends Controller
             return redirect()->back()->with('error', "There is some problem It will fix soon");
 
         }
-
-
-       
 
     }
 

@@ -37,7 +37,7 @@
 @endsection
 
 @section('pageside')
-  @include('admin.layout.sidebar',['page' => 'slider'])
+  @include('admin.layout.sidebar',['page' => 'web'])
 @endsection
 
 @section('bodyContent')
@@ -66,7 +66,7 @@
                                     <div class="col-md-9 col-12">
                                         <input type="text" class="form-control p-1 @error('title') is-invalid
                                         @enderror" name="title"
-                                            value="{{ $editSlider ? $editSlider->title : "" }}" placeholder="Enter Title">
+                                            value="{{ old('title',optional($editSlider)->title) }}" placeholder="Enter Title">
                                         @error('title')
                                             <p class="text-danger">{{ $message }}</p>
                                         @enderror
@@ -83,7 +83,7 @@
                                     <div class="col-md-9 col-12">
                                         <textarea class="form-control @error('description') is-invalid
                                         @enderror" name="description" placeholder="" id="comment"
-                                            rows="3">{{ $editSlider ? $editSlider->description : "" }}</textarea>
+                                            rows="3">{{ old('description',optional($editSlider)->description) }}</textarea>
                                         @error('description')
                                             <p class="text-danger">{{ $message }}</p>
                                         @enderror
@@ -100,6 +100,7 @@
                                             <img id="previewImage"
                                                 src="{{ $editSlider ? asset('storage/' . $editSlider->img) : asset('assets/admin/img/demoUpload.jpg') }}"
                                                 alt="Demo Image" class="profileImg" style="">
+                                            <p>Image Retio must be 3:1</p>
                                         </label>
 
                                         <!-- hidden input -->

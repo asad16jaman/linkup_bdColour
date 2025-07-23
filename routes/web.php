@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AboutController;
+use App\Http\Controllers\Admin\AreaController;
 use App\Http\Controllers\Admin\ClientController;
 use App\Http\Controllers\admin\CompanyController;
 use App\Http\Controllers\Admin\ContactController;
@@ -25,7 +26,11 @@ Route::post('/',[HomeController::class,'storeContact'])->name('storeMessage');
 
 
 
-Route::get("/product",[HomeController::class,"products"])->name("product");
+Route::get("/products",[HomeController::class,"products"])->name("product");
+Route::get("/product/{id}/detail-view",[HomeController::class,"singleProduct"])->name("product.item");
+
+
+
 Route::get("/contact",[HomeController::class,"contact"])->name("contact");
 
 // Route::get("/about",[HomeController::class,"about"])->name("about");
@@ -119,7 +124,12 @@ Route::group(['prefix'=> '/admin','middleware'=>'checkAdminAuth','as'=>'admin.']
     // faq hare
     Route::get('/faq',[FaqController::class,'index'])->name('faq');
     Route::post('/faq',[FaqController::class,'store'])->name('faq');
-     Route::post('/faq/{id}',[FaqController::class,'destroy'])->name('faq.delete');
+     Route::post('/faq/{id}/delete',[FaqController::class,'destroy'])->name('faq.delete');
+
+    // faq hare
+    Route::get('/area',[AreaController::class,'index'])->name('area');
+    Route::post('/area',[AreaController::class,'store'])->name('area');
+    Route::post('/area/{id}/delete',[AreaController::class,'destroy'])->name('area.delete');
 
     //dealer faq hare
     Route::get('/delear/{id?}',[DelearController::class,'index'])->name('delear');

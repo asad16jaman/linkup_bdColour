@@ -57,7 +57,7 @@
                                     </div>
                                     <div class="col-md-9 col-12">
                                         <input type="text" class="form-control p-1 @error('name') is-invalid
-                                        @enderror"  name="name" value="{{ $editItem ? $editItem->name : "" }}"
+                                        @enderror"  name="name" value="{{ old('name',optional($editItem)->name) }}"
                                             placeholder="Enter Product Name">
                                         @error('name')
                                             <p class="text-danger">{{  $message }}</p>
@@ -77,7 +77,7 @@
                                     </div>
                                     <div class="col-md-9 col-12">
                                         <input type="text" class="form-control p-1 @error('phone') is-invalid
-                                        @enderror"  name="phone" value="{{ $editItem ? $editItem->phone : "" }}"
+                                        @enderror"  name="phone" value="{{ old('phone',optional($editItem)->phone) }}"
                                             placeholder="Enter Phone Number">
                                         @error('phone')
                                             <p class="text-danger">{{  $message }}</p>
@@ -89,6 +89,38 @@
 
 
                             <div class="col-md-6 col-12">
+
+                                <div class="row mb-2">
+                                    <div class="col-md-3 col-12">
+                                        <div class="">
+                                            <label for="email2">Area :</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-9 col-12">
+                                        <select name="area_id" class="form-control p-1"  id="">
+                                            @if($editItem)
+                                                @foreach ($areas as $area)
+
+                                                    <option value="{{ $area->id }}" @selected($editItem->area_id == $area->id)>{{ $area->name }}</option>
+                                                @endforeach
+
+                                            @else
+
+                                                @foreach ($areas as $area)
+
+                                                    <option value="{{ $area->id }}">{{ $area->name }}</option>
+                                                @endforeach
+
+                                            @endif
+                                            
+                                            
+                                        </select>
+                                        @error('area')
+                                            <p class="text-danger">{{  $message }}</p>
+                                        @enderror
+                                        
+                                    </div>
+                                </div>
                                
                                 <div class="row mb-2">
                                     <div class="col-md-3 col-12">
@@ -99,7 +131,7 @@
                                     </div>
                                     <div class="col-md-9 col-12">
                                         <textarea name="address" class="form-control @error('address') is-invalid
-                                        @enderror" rows="2" id="" placeholder="Enter Address">{{ $editItem ? $editItem->address : "" }}</textarea>
+                                        @enderror" rows="1" id="" placeholder="Enter Address">{{ old('address',optional($editItem)->address)}}</textarea>
                                         @error('address')
                                             <p class="text-danger">{{  $message }}</p>
                                         @enderror
@@ -227,9 +259,6 @@
 @push('script')
 <script>
     
-
-
-   
 
     
 </script>
