@@ -44,8 +44,8 @@ class ManagemenController extends Controller
 
         ];
 
-        // if ($id = null) {
-        //     $validaterules['photo'] = "required|image|mimes:jpeg,jpg,png,gif,webp,svg|max:2048";
+        // if ($id = null || $request->hasFile('photo')) {
+        //     $validaterules['photo'] = "required|image|mimes:jpeg,jpg,png,gif,webp,svg";
         // };
 
         $request->validate($validaterules);
@@ -54,12 +54,9 @@ class ManagemenController extends Controller
 
 
         if ($id != null) {
+
             //user edit section is hare
-
             $currentEditUser = Management::find($id);
-
-            
-
             if ($request->hasFile('photo')) {
 
                 //delete if user already have profile picture...
@@ -72,15 +69,17 @@ class ManagemenController extends Controller
             }
 
             Management::where('id', '=', $id)->update($data);
-            return redirect()->route('admin.management',['page'=>$request->query('page'),'search'=>$request->query('search')])->with("success", "Successfully Edit the Team");
+            return redirect()->route('admin.management',['page'=>$request->query('page'),'search'=>$request->query('search')])->with("success", "Successfully Edit the Management");
         }
+
+
 
         if ($request->hasFile('photo')) {
             $path = $request->file('photo')->store('team');
             $data['photo'] = $path;
         }
         Management::create($data);
-        return back()->with("success", "Successfully added the team");
+        return back()->with("success", "Successfully added the Management");
 
 
     }
