@@ -40,7 +40,7 @@ class SliderController extends Controller
         
 
         if($id == null || $request->hasFile('img')){
-            $validationRules['img'] = "required|image|mimes:jpeg,jpg,png,gif,webp,svg|dimensions:min_width=600,min_height=200,ratio=3/1";
+            $validationRules['img'] = "required|image|mimes:jpeg,jpg,png,gif,webp,svg";
         }
 
         $request->validate($validationRules);

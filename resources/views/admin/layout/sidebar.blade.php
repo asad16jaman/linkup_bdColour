@@ -35,11 +35,6 @@
                    <p>Dashboard</p>
                 </a>
               </li>
-              
-            
-
-              
-
               <li class="nav-item {{ ($page == 'web') ? 'active' : "" }}">
                 <a data-bs-toggle="collapse" href="#web">
                   <i class="fas fa-images"></i>
@@ -72,13 +67,6 @@
                       </a>
                     </li>
                     @endcan
-
-
-                    <!-- <li>
-                      <a href="">
-                        <span class="sub-item">Video Gallery</span>
-                      </a>
-                    </li> -->
                   </ul>
                 </div>
               </li>
@@ -145,13 +133,36 @@
                 </a>
               </li>
 
+
               <li class="nav-item {{ ($page=='client') ? 'active' : ''}}">
-                <a href="{{ route('admin.delear') }}">
+                <a data-bs-toggle="collapse" href="#dealers">
                   <i class="fas fa-handshake"></i>
-                  <p>Dealer</p>
-                  <!-- <span class="badge badge-success">4</span> -->
+                  <p>Dealers</p>
+                  <span class="caret"></span>
                 </a>
+                <div class="collapse" id="dealers">
+                  <ul class="nav nav-collapse">
+                    <li>
+                      <a href="{{ route('admin.delear') }}" style="padding: 5px 24px !important">
+                        <span class="sub-item">Approve Dealers</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="{{ route('admin.p_delear') }}" style="padding: 5px 24px !important">
+                        <span class="sub-item">Pending Dealers</span>
+                      </a>
+                    </li>
+                    
+                    <!-- <li>
+                      <a href="">
+                        <span class="sub-item">Video Gallery</span>
+                      </a>
+                    </li> -->
+                  </ul>
+                </div>
               </li>
+
+             
 
               
               

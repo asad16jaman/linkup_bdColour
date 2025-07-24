@@ -22,9 +22,49 @@ class DelearController extends Controller
 
         $areas = Area::all();
 
-        $alldelears = Dealer::orderBy("id","desc")->paginate(10);
+        $search = request()->query("search",null);
+        if($search){
+            $alldelears = Dealer::with('area')->where('status','=','a')->where('name','like','%'.$search.'%')->orderBy("id","desc")->paginate(10);
+        }else{
+             $alldelears = Dealer::with('area')->where('status','=','a')->orderBy("id","desc")->paginate(10);
+        }
+
+       
+
+        // return response()->json($alldelears);
 
         return view("admin.delear",compact("alldelears","editItem",'areas'));
+    }
+
+
+    public function pendingDealers(){
+
+        
+        
+
+        $search = request()->query("search",null);
+        if($search){
+            $alldelears = Dealer::with('area')->where('status','=','p')->where('name','like','%'.$search.'%')->orderBy("id","desc")->paginate(10);
+        }else{
+             $alldelears = Dealer::with('area')->where('status','=','p')->orderBy("id","desc")->paginate(10);
+        }
+
+        // return response()->json($alldelears);
+
+        return view("admin.panding",compact("alldelears"));
+    }
+
+    public function updatePending(int $id){
+
+        try{
+            // return response()->json(['id' => $id],200);
+            Dealer::findOrFail($id)->update(["status"=> "a"]);
+            return redirect()->back()->with('success',"successfully Approved");
+        }catch (\Exception $e){
+            return redirect()->back()->with('danger',"There is some problem");
+        }
+        
+
     }
 
 
@@ -35,16 +75,25 @@ class DelearController extends Controller
             "name"=> "required",
             'phone' => ['required', 'regex:/^01[3-9][0-9]{8}$/'],
             'address' => 'required',
+            'email' => ['required','email'],
+            'phone2'=> ['nullable', 'regex:/^01[3-9][0-9]{8}$/'],
+            'company_name'=> ['required'],
         ]);
 
-        $data = $request->only(['name','phone','address','area_id']);
+        $data = $request->only(['name','phone','address','area_id','phone2','company_name','email','status','website']);
 
         try{
 
             if($id != null){
 
-            Dealer::where('id',$id)->update($data);
-            return redirect()->route('admin.delear',['page'=>$request->query('page'),'search'=>$request->query('search')])->with('  success','successfully edited');
+                Dealer::where('id',$id)->update($data);
+
+                 if ($request->route()->named('admin.delear')) {
+                      return redirect()->route('admin.delear',['page'=>$request->query('page'),'search'=>$request->query('search')])->with('  success','successfully edited');
+                }else{
+                    return redirect()->route('admin.p_delear',['page'=>$request->query('page'),'search'=>$request->query('search')])->with('  success','successfully edited');
+                }
+                
 
             }
 
@@ -65,7 +114,7 @@ class DelearController extends Controller
         try{
 
             Dealer::find($id)->delete();
-            return response()->back()->with("success","Successfully Deleted");
+            return redirect()->back()->with("success","Successfully Deleted");
 
         }catch (\Exception $e){
 

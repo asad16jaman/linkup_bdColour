@@ -30,8 +30,15 @@ Route::get("/products",[HomeController::class,"products"])->name("product");
 Route::get("/product/{id}/detail-view",[HomeController::class,"singleProduct"])->name("product.item");
 
 
-
 Route::get("/contact",[HomeController::class,"contact"])->name("contact");
+
+
+//delear list getting url 
+Route::get("/delearlist",[HomeController::class,"delearList"])->name("delearlist");
+Route::get("/delearform",[HomeController::class,"delearRequest"])->name("delearform");
+Route::post("/delearform",[HomeController::class,"storeDealer"])->name("delearform");
+
+
 
 // Route::get("/about",[HomeController::class,"about"])->name("about");
 // Route::get("/project",[HomeController::class,"project"])->name("project");
@@ -132,8 +139,13 @@ Route::group(['prefix'=> '/admin','middleware'=>'checkAdminAuth','as'=>'admin.']
     Route::post('/area/{id}/delete',[AreaController::class,'destroy'])->name('area.delete');
 
     //dealer faq hare
-    Route::get('/delear/{id?}',[DelearController::class,'index'])->name('delear');
-    Route::post('/delear/{id?}',[DelearController::class,'store'])->name('delear');
+    Route::get('/delear/aproved/{id?}',[DelearController::class,'index'])->name('delear');
+    Route::post('/delear/aproved/{id?}',[DelearController::class,'store'])->name('delear');
+    //handling pending delears
+    Route::get('/delear/pending',[DelearController::class,'pendingDealers'])->name('p_delear');
+
+    Route::post('/delear/pending/{id}',[DelearController::class,'updatePending'])->name('p_delear.updated');
+
     Route::post('/delear/{id}/delete',[DelearController::class,'destroy'])->name('delear.delete');
 
     //Contact url hare

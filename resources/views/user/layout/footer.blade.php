@@ -21,31 +21,30 @@
         </div>
 
         <div class="col-lg-3 col-md-3 footer-links">
-          <h4>Useful Links</h4>
+          <h4>Home Section</h4>
           <ul>
             <li><a href="{{ route('home') }}">Home</a></li>
             <li><a href="{{ route('home') }}#about">About us</a></li>
             <li><a href="{{ route('home') }}#service">Product</a></li>
-            <li><a href="">Delear Form</a></li>
-            <li><a href="{{ route('contact') }}">Contact</a></li>
+            <li><a href="{{ route('home') }}#management">Management</a></li>
+            <li><a href="{{ route('home') }}#gallery">Gallery</a></li>
           </ul>
         </div>
 
         <div class="col-lg-3 col-md-3 footer-links">
-          <h4>Our Services</h4>
+          <h4>Pages</h4>
           <ul>
-            <li><a href="#">Web Design</a></li>
-            <li><a href="#">Web Development</a></li>
-            <li><a href="#">Product Management</a></li>
-            <li><a href="#">Marketing</a></li>
-            <li><a href="#">Graphic Design</a></li>
+            <li><a href="{{ route('delearlist') }}">Dealer List</a></li>
+            <li><a href="{{ route('delearform') }}">Request Form</a></li>
+            <li><a href="{{ route('contact') }}">Contact</a></li>
+            
           </ul>
         </div>
 
         <div class="col-lg-2 col-md-3 footer-links">
-          <h4>Hic solutasetp</h4>
+          <h4>Our Vision</h4>
           <div>
-            {{ $company->footer_text }}
+            {{ substr($company->footer_text,0,170) }}
           </div>
         </div>
       </div>

@@ -18,21 +18,21 @@
                     <img src="{{ ($company && $company->logo) ? asset('storage/'.$company->logo) : asset('assets/user/img/logo.png') }}" alt="">
                   
                     <!-- Uncomment the line below if you also wish to use a text logo -->
-                    <h1 class="sitename">Medicio</h1> 
+                    <h1 class="sitename">{{ $company->name }}</h1> 
                 </a>
 
                 <nav id="navmenu" class="navmenu">
                     <ul>
-                        <li><a href="{{ route('home') }}" class="active">Home</a></li>
+                        <li><a href="{{ route('home') }}#hero" class="active">Home</a></li>
                         <li><a href="{{ route('home') }}#about">About</a></li>
                         <li><a href="{{ route('home') }}#product">Product</a></li>
-                        <li><a href="{{ route('home') }}#gallery">Gallery</a></li>
-                        <!-- <li><a href="#departments">Delerlist</a></li> -->
                         <li><a href="{{ route('home') }}#management">Management</a></li>
+                        <li><a href="{{ route('home') }}#gallery">Gallery</a></li>
                         <li class="dropdown"><a href="#"><span>Delerlist</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                             <ul>
-                                <li><a href="#">Dealer Request Form</a></li>
-                                <li><a href="#">Dealer Form</a></li>
+                                <li><a href="{{ route('delearlist') }}">Dealer List</a></li>
+                                <li><a href="{{ route('delearform') }}">Dealer Request Form</a></li>
+                                
                             </ul>
                             </li>
 

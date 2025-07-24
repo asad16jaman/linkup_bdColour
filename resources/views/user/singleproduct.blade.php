@@ -71,7 +71,7 @@
             <div class="services-list">
               <a href="#" class="active">Product : {{ $product->name }}</a>
               <a href="#">Category :{{ $product->category->name }}</a>
-              
+              <a href="#">Price :{{ $product->price }}</a>
             </div>
 
             

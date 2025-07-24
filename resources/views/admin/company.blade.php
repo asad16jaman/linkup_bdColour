@@ -158,7 +158,7 @@
                                         <label for="password">Map :</label>
                                     </div>
                                     <div class="col-md-9 col-12">
-                                        <textarea class="form-control"  name="map" id="" rows="2">{{ $company->map ?? '' }}</textarea>                                   
+                                        <textarea class="form-control"  name="map" id="" resizable rows="3">{{ $company->map ?? '' }}</textarea>                                   
                                      </div>
                                 </div>
 

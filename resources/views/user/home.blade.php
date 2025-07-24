@@ -7,7 +7,7 @@
 @section('style')
      <style>
           .hero .container {
-               background-color: #ffffffb8;
+               background-color: #ffffff8f;
           }
      </style>
 @endsection
