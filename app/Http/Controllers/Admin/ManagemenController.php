@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Exception;
 use App\Models\Management;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class ManagemenController extends Controller
@@ -18,7 +20,7 @@ class ManagemenController extends Controller
 
         $editTeam = null;
         if ($id != null) {
-            $editTeam = Management::find($id);
+            $editTeam = Management::findOrFail($id);
         }
 
         $searchValue = $request->query("search", null);
@@ -44,9 +46,9 @@ class ManagemenController extends Controller
 
         ];
 
-        // if ($id = null || $request->hasFile('photo')) {
-        //     $validaterules['photo'] = "required|image|mimes:jpeg,jpg,png,gif,webp,svg";
-        // };
+        if ($id == null || $request->hasFile('photo')) {
+            $validaterules['photo'] = "required|image|mimes:jpeg,jpg,png,gif,webp,svg";
+        };
 
         $request->validate($validaterules);
 
@@ -55,31 +57,44 @@ class ManagemenController extends Controller
 
         if ($id != null) {
 
-            //user edit section is hare
-            $currentEditUser = Management::find($id);
-            if ($request->hasFile('photo')) {
+            try{
+                //user edit section is hare
+                $currentEditUser = Management::findOrFail($id);
+                if ($request->hasFile('photo')) {
 
-                //delete if user already have profile picture...
-                if ($currentEditUser->photo != null) {
-                    Storage::delete($currentEditUser->photo);
+                    //delete if user already have profile picture...
+                    if ($currentEditUser->photo != null) {
+                        Storage::delete($currentEditUser->photo);
+                    }
+
+                    $path = $request->file('photo')->store('team');
+                    $data['photo'] = $path;
                 }
 
+                Management::where('id', '=', $id)->update($data);
+                return redirect()->route('admin.management',['page'=>$request->query('page'),'search'=>$request->query('search')])->with("success", "Successfully Edit");
+
+            }catch (Exception $e){
+
+                Log::error("this message is from : ".__CLASS__."Line is : ".__LINE__." messages is ".$e->getMessage());
+                return redirect()->route('error');
+                
+            }
+            
+        }
+
+
+        try{
+            if ($request->hasFile('photo')) {
                 $path = $request->file('photo')->store('team');
                 $data['photo'] = $path;
             }
-
-            Management::where('id', '=', $id)->update($data);
-            return redirect()->route('admin.management',['page'=>$request->query('page'),'search'=>$request->query('search')])->with("success", "Successfully Edit the Management");
+            Management::create($data);
+            return back()->with("success", "Successfully added");
+        }catch(Exception $e){
+            Log::error("this message is from : ".__CLASS__."Line is : ".__LINE__." messages is ".$e->getMessage());
+            return redirect()->route('error');
         }
-
-
-
-        if ($request->hasFile('photo')) {
-            $path = $request->file('photo')->store('team');
-            $data['photo'] = $path;
-        }
-        Management::create($data);
-        return back()->with("success", "Successfully added the Management");
 
 
     }
@@ -87,21 +102,22 @@ class ManagemenController extends Controller
     public function destroy(int $id)
     {
 
-        $data = Management::find($id);
-        if ($data) {
+        try{
+            $data = Management::find($id);
+            if ($data) {
 
-            //unlink image from directory....
-            if($data->photo != null) {
-                Storage::delete($data->photo);
+                //unlink image from directory....
+                if($data->photo != null) {
+                    Storage::delete($data->photo);
+                }
+                
+                $data->delete();
             }
-            
-            $data->delete();
+            return redirect()->route('admin.management')->with('success', 'Successfully Delete');
+        }catch(Exception $e){
+            Log::error("this message is from : ".__CLASS__."Line is : ".__LINE__." messages is ".$e->getMessage());
+            return redirect()->route('error');
         }
-
-
-
-        return redirect()->route('admin.management')->with('success', 'Successfully Delete team');
-
 
     }
 

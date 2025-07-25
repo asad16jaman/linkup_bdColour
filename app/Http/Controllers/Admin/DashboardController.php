@@ -66,6 +66,11 @@ class DashboardController extends Controller
     }
 
 
+    function errorpage(){
+        return view('admin.404');
+    }
+
+
 
 
 

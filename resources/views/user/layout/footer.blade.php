@@ -7,16 +7,16 @@
             <span class="sitename">Medicio</span>
           </a>
           <div class="footer-contact pt-3">
-            <p>{{ $company->address }}</p>
+            <p>{{ $company->address ?? "address will be hare" }}</p>
             
-            <p class="mt-3"><strong>Phone:</strong> <span>{{ $company->phone }}</span></p>
-            <p><strong>Email:</strong> <span>{{ $company->email }}</span></p>
+            <p class="mt-3"><strong>Phone:</strong> <span>{{ $company->phone ?? '+8801xxxxxxxxxxx' }}</span></p>
+            <p><strong>Email:</strong> <span>{{ $company->email ?? "demo@gmail.com" }}</span></p>
           </div>
           <div class="social-links d-flex mt-4">
-            <a href="{{ $company->whatsapp }}"><i class="bi bi-whatsapp"></i></a>
-            <a href="{{ $company->facebook }}"><i class="bi bi-facebook"></i></a>
-            <a href="{{ $company->instagram }}"><i class="bi bi-instagram"></i></a>
-            <a href="{{ $company->linkdin }}"><i class="bi bi-linkedin"></i></a>
+            <a href="{{ $company->whatsapp ?? '#' }}"><i class="bi bi-whatsapp"></i></a>
+            <a href="{{ $company->facebook ?? '#'}}"><i class="bi bi-facebook"></i></a>
+            <a href="{{ $company->instagram ?? '#'}}"><i class="bi bi-instagram"></i></a>
+            <a href="{{ $company->linkdin ?? '#'}}"><i class="bi bi-linkedin"></i></a>
           </div>
         </div>
 
@@ -44,7 +44,7 @@
         <div class="col-lg-2 col-md-3 footer-links">
           <h4>Our Vision</h4>
           <div>
-            {{ substr($company->footer_text,0,170) }}
+            {{ ($company) ? substr($company->footer_text,0,170) : "company footer" }}
           </div>
         </div>
       </div>

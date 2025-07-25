@@ -6,7 +6,7 @@
                     <i class="bi bi-clock me-1"></i> Monday - Saturday, 8AM to 10PM
                 </div>
                 <div class="d-flex align-items-center">
-                    <i class="bi bi-phone me-1"></i> Call us now {{ $company->phone }}
+                    <i class="bi bi-phone me-1"></i> Call us now {{ $company->phone ?? '+88xxxxxxxxx' }}
                 </div>
             </div>
         </div><!-- End Top Bar -->
@@ -18,7 +18,7 @@
                     <img src="{{ ($company && $company->logo) ? asset('storage/'.$company->logo) : asset('assets/user/img/logo.png') }}" alt="">
                   
                     <!-- Uncomment the line below if you also wish to use a text logo -->
-                    <h1 class="sitename">{{ $company->name }}</h1> 
+                    <h1 class="sitename">{{ $company->name ?? "link" }}</h1> 
                 </a>
 
                 <nav id="navmenu" class="navmenu">

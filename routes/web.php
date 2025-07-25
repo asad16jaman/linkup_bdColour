@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\AreaController;
-use App\Http\Controllers\Admin\ClientController;
 use App\Http\Controllers\admin\CompanyController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -15,7 +14,7 @@ use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\VideoGalleryController;
+
 
 use Illuminate\Support\Facades\Route;
 
@@ -40,21 +39,12 @@ Route::post("/delearform",[HomeController::class,"storeDealer"])->name("delearfo
 
 
 
-// Route::get("/about",[HomeController::class,"about"])->name("about");
-// Route::get("/project",[HomeController::class,"project"])->name("project");
-
-// Route::post("/savemessage",[HomeController::class,"storeContact"])->name("contact.store");
-// Route::get("/teams",[HomeController::class,"getTeam"])->name("team");
-// Route::get("/testimonial",[HomeController::class,"testimonial"])->name("testimonial");
-// Route::get("/fqa",[HomeController::class,"fqaTemplate"])->name("fqa");
-
-
-
 
 Route::prefix('admin')->group(function(){
 
     Route::get('/login',[DashboardController::class,'login'])->name('admin.login');
     Route::post('/login',[DashboardController::class,'authenticate'])->name('admin.login');
+    Route::get('/error',[DashboardController::class,'errorpage'])->name('error');
     
     //registring admin/users
     Route::get('/register',[DashboardController::class,'register'])->name('admin.register');
@@ -108,21 +98,13 @@ Route::group(['prefix'=> '/admin','middleware'=>'checkAdminAuth','as'=>'admin.']
     Route::post("/photogallery/{id?}",[PhotoGalleryController::class,"store"])->name("photogallery");
     Route::post("/photogallery/{id}/delete",[PhotoGalleryController::class,"destory"])->name("photogallery.delete");
 
-    //Video Gallery url hare
-    Route::get("/videogallery/{id?}",[VideoGalleryController::class,"index"])->name("videogallery");
-    Route::post("/videogallery/{id?}",[VideoGalleryController::class,"store"])->name("videogallery");
-    Route::post("/videogallery/{id}/delete",[VideoGalleryController::class,"destory"])->name("videogallery.delete");
-
-    //team url hare
+    
+    //Managment url hare
     Route::get('/manage/{id?}',[ManagemenController::class,'index'])->name('management');
     Route::post('/manage/{id?}',[ManagemenController::class,'store'])->name('management');
     Route::post('/management/{id}/delete',[ManagemenController::class,'destroy'])->name('management.delete');
 
 
-    //client url hare
-    // Route::get('/clients/{id?}',[ClientController::class,'index'])->name('client');
-    // Route::post('/clients/{id?}',[ClientController::class,'store'])->name('client');
-    // Route::post('/client/{id}/delete',[ClientController::class,'destroy'])->name('client.delete');
 
     //about url hare
     Route::get('/about',[AboutController::class,'index'])->name('about');
@@ -131,7 +113,7 @@ Route::group(['prefix'=> '/admin','middleware'=>'checkAdminAuth','as'=>'admin.']
     // faq hare
     Route::get('/faq',[FaqController::class,'index'])->name('faq');
     Route::post('/faq',[FaqController::class,'store'])->name('faq');
-     Route::post('/faq/{id}/delete',[FaqController::class,'destroy'])->name('faq.delete');
+    Route::post('/faq/{id}/delete',[FaqController::class,'destroy'])->name('faq.delete');
 
     // faq hare
     Route::get('/area',[AreaController::class,'index'])->name('area');
@@ -139,13 +121,13 @@ Route::group(['prefix'=> '/admin','middleware'=>'checkAdminAuth','as'=>'admin.']
     Route::post('/area/{id}/delete',[AreaController::class,'destroy'])->name('area.delete');
 
     //dealer faq hare
+    //handling apprived dealer
     Route::get('/delear/aproved/{id?}',[DelearController::class,'index'])->name('delear');
     Route::post('/delear/aproved/{id?}',[DelearController::class,'store'])->name('delear');
     //handling pending delears
     Route::get('/delear/pending',[DelearController::class,'pendingDealers'])->name('p_delear');
-
     Route::post('/delear/pending/{id}',[DelearController::class,'updatePending'])->name('p_delear.updated');
-
+    //delete deler
     Route::post('/delear/{id}/delete',[DelearController::class,'destroy'])->name('delear.delete');
 
     //Contact url hare

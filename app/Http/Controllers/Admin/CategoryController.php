@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Category;
+use Exception;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
@@ -16,17 +17,15 @@ class CategoryController extends Controller
 
         $editCategory = null;
         if ($id != null) {
-            $editCategory = Category::find($id);
+            $editCategory = Category::findOrFail($id);
         }
 
         $searchValue = $request->query("search", null);
         if ($searchValue != null) {
-            $allCategories = Category::where("name", "like", "%" . $searchValue . "%")->orderBy('id', 'desc')->simplePaginate(3);
+            $allCategories = Category::where("name", "like", "%" . $searchValue . "%")->orderBy('id', 'desc')->simplePaginate(10);
         } else {
-            $allCategories = Category::orderBy('id', 'desc')->simplePaginate(3);
+            $allCategories = Category::orderBy('id', 'desc')->simplePaginate(10);
         }
-        ;
-
         return view('admin.category', compact('allCategories', 'editCategory'));
     }
 
@@ -38,8 +37,6 @@ class CategoryController extends Controller
             'name'=> 'required',
             'description' => 'required',
         ];
-        
-
         if($id==null || $request->hasFile('img')){
             $validationRules['img'] = [
                                 'required',
@@ -51,44 +48,41 @@ class CategoryController extends Controller
 
         $request->validate($validationRules);
 
-
         $data = $request->only(['description', 'name']);
         if ($id != null) {
-            //
+            //edit catagory
+            $currentEditUser = Category::findOrFail($id);
+            try{
+                if ($request->hasFile('img')) {
 
-            $currentEditUser = Category::find($id);
-
-            if ($request->hasFile('img')) {
-
-                //delete if user already have profile picture...
-                if ($currentEditUser->img != null) {
-                    Storage::delete($currentEditUser->img);
+                    //delete if user already have profile picture...
+                    if ($currentEditUser->img != null) {
+                        Storage::delete($currentEditUser->img);
+                    }
+                    $path = $request->file('img')->store('service');
+                    $data['img'] = $path;
                 }
-
-
-                $path = $request->file('img')->store('service');
-                $data['img'] = $path;
+                Category::where('id', '=', $id)->update($data);
+                return redirect()->route('admin.category',['page'=>$request->query('page'),'search'=>$request->query('search')])->with("success", "Successfully Edit");
+            }catch(Exception $e){
+                Log::error("this message is from : ".__CLASS__."Line is : ".__LINE__." messages is ".$e->getMessage());
+                return redirect()->route('error');
             }
-
-            Category::where('id', '=', $id)->update($data);
-
-
-             $backRoute =   route('admin.category');
-           $backRoute = $backRoute."?page=".$request->page;
-            
-            return redirect()->route('admin.category',['page'=>$request->query('page'),'search'=>$request->query('search')])->with("success", "Successfully Edit the user");
         }
 
 
       
-
-        if ($request->hasFile('img')) {
-            $path = $request->file('img')->store('service');
-            $data['img'] = $path;
+        try{
+            if ($request->hasFile('img')) {
+                $path = $request->file('img')->store('service');
+                $data['img'] = $path;
+            }
+            Category::create($data);
+            return back()->with("success", "Successfully added");
+        }catch(Exception $e){
+            Log::error("this message is from : ".__CLASS__."Line is : ".__LINE__." messages is ".$e->getMessage());
+            return redirect()->route('error');
         }
-        Category::create($data);
-
-        return back()->with("success", "Successfully added the Category");
 
 
     }
@@ -106,8 +100,9 @@ class CategoryController extends Controller
                 }
                 
                 $data->delete();
-            }catch(\Exception $e){
-                 return redirect()->route('admin.category')->with('danger', 'First delete all Product of this catagory');
+            }catch(Exception $e){
+                 Log::error("this message is from : ".__CLASS__."Line is : ".__LINE__." messages is ".$e->getMessage());
+                 return redirect()->route('error');
             }
         }
 

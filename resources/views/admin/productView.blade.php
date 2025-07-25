@@ -93,7 +93,7 @@
                                     </div>
                                     <div class="col-md-9 col-12">
                                         <input type="text" class="form-control p-1 @error('name') is-invalid
-                                        @enderror"  name="name" value="{{ $editItem ? $editItem->name : "" }}"
+                                        @enderror"  name="name" value="{{ old('name',optional($editItem)->name)}}"
                                             placeholder="Enter Product Name">
                                         @error('name')
                                             <p class="text-danger">{{  $message }}</p>
@@ -110,7 +110,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-9 col-12">
-                                        <input type="text" class="form-control p-1 @error('price') is-invalid @enderror"  name="price" value="{{ $editItem ? $editItem->price : "" }}"
+                                        <input type="text" class="form-control p-1 @error('price') is-invalid @enderror"  name="price" value="{{ old('price',optional($editItem)->price)}}"
                                             placeholder="Enter Product Price">
                                         @error('price')
                                             <p class="text-danger">{{ $message }}</p>
@@ -128,8 +128,8 @@
                                     </div>
                                     <div class="col-md-9 col-12">
                                         <textarea name="description" class="form-control @error('description') is-invalid
-                                        @enderror" rows="2" id="">{{ $editItem ? $editItem->description : "" }}</textarea>
-                                        @error('name')
+                                        @enderror" rows="2" id="">{{ old('description', optional($editItem)->description) }}</textarea>
+                                        @error('description')
                                             <p class="text-danger">{{ $message }}</p>
                                         @enderror
                                     </div>
@@ -144,18 +144,19 @@
                                         </div>
                                     </div>
                                     <div class="col-md-9 col-12">
-                                        <select name="category_id" id="" class="form-control p-1">
+                                        <select name="category_id" id="" class="form-control p-1 @error('category_id') is-invalid
+                                        @enderror">
                                             <!-- <option value="1">dkslk</option>
                                             <option value="1">dkslk</option> -->
-
+                                            <option value="">-- Select Category --</option>
                                             @if($editItem != null)
                                                 @foreach ($categories as $category)
-                                                    <option value="{{ $category->id }}" @selected($editItem->category->id == $category->id) >{{ $category->name }}</option>
+                                                    <option value="{{ $category->id }}" @selected(old('category_id', optional($editItem)->category_id) == $category->id)>{{ $category->name }}</option>
                                                 @endforeach
                                             @else
 
                                                 @foreach ($categories as $category)
-                                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                                    <option value="{{ $category->id }}" @selected((old('category_id') == $category->id))>{{ $category->name }}</option>
                                                 @endforeach
 
                                             @endif
@@ -188,7 +189,7 @@
                             <div class="col-12">
                                     <div class="">
                                         <label for="long_Description">Long Discription :</label>
-                                        <textarea name="logn_description" class="form-control" rows="6" id="description">{{ $editItem ? $editItem->logn_description : "" }}</textarea>
+                                        <textarea name="logn_description" class="form-control" rows="6" id="description">{{ old('logn_description',optional($editItem)->logn_description) }}</textarea>
                                     </div>
                             </div>
                         </div>

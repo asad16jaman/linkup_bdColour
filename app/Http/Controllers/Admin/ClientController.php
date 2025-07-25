@@ -35,7 +35,7 @@ class ClientController extends Controller
             'name'=> 'required',
             'profession' => 'required',
         ] ;
-        if($id == null){
+        if($id == null || $request->hasFile('photo')){
             $validationRules['photo'] = "required|image|mimes:jpeg,jpg,png,gif,webp,svg|max:2048";
         }
         $request->validate($validationRules);
