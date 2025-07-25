@@ -45,6 +45,9 @@
       .main-header .navbar-header {
             min-height: 45px;
         }
+        .pl{
+          padding-left:25px ;
+        }
     </style>
     @yield('style')
   </head>

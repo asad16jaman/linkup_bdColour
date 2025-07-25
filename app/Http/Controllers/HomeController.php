@@ -87,11 +87,11 @@ class HomeController extends Controller
         $search = request()->query('search',null);
         if($search){
 
-            $allDelears = Dealer::with('area')->where('status','=','a')->where('name','like','%'.$search.'%')->simplePaginate(10);
+            $allDelears = Dealer::with('area')->where('status','=','a')->where('name','like','%'.$search.'%')->orderBy('id','desc')->simplePaginate(10);
 
         }else{
 
-            $allDelears = Dealer::with('area')->where('status','=','a')->simplePaginate(10);
+            $allDelears = Dealer::with('area')->where('status','=','a')->orderBy('id','desc')->simplePaginate(10);
 
         }
         return view("user.delearlist",compact(["allDelears"]));
@@ -99,7 +99,6 @@ class HomeController extends Controller
 
     public function delearRequest(){
 
-        
         $allareas = Area::select(['id','name'])->get();
         return view("user.delearform",compact(["allareas"]));
     }
@@ -114,12 +113,16 @@ class HomeController extends Controller
             'phone2'=> ['nullable', 'regex:/^01[3-9][0-9]{8}$/'],
             'company_name'=> ['required'],
             'area_id'=> ['required'],
+            'website' => [
+                        'nullable',
+                        'regex:/^(https?:\/\/)?(www\.)?[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(\/[^\s]*)?$/'
+                    ],
         ]);
 
         
         try {
 
-            $data = $request->only(['name','phone','address','area_id','phone2','company_name','email']);
+            $data = $request->only(['name','phone','address','area_id','phone2','company_name','email','website']);
             Dealer::create($data);
             return back()->with('success',"Successfully Request Sand...");
         }catch(\Exception $e){

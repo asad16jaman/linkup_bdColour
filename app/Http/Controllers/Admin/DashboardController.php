@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\User;
+use App\Models\Dealer;
+use App\Models\Contact;
+use App\Models\Management;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
@@ -14,8 +18,11 @@ class DashboardController extends Controller
 
     public function index(){
 
-
-        return view("admin.dashboard");
+        $management = Management::count();
+        $approved = Dealer::where('status','=','a')->count();
+        $pendding = Dealer::where('status','=','p')->count();
+        $message =  Contact::where('created_at', '>=', Carbon::now()->subHours(24))->count();
+        return view("admin.dashboard",compact(['message','pendding','approved','management']));
     }
 
 

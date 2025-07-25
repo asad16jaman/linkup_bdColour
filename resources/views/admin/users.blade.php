@@ -33,7 +33,7 @@
 @endsection
 
 @section('pageside')
-  @include('admin.layout.sidebar',['page' => 'web'])
+  @include('admin.layout.sidebar',['page' => 'users'])
 @endsection
 
 @section('bodyContent')
@@ -61,7 +61,7 @@
                                     </div>
                                     <div class="col-md-9 col-12">
                                         <input type="text" class="form-control p-1 @error('username') is-invalid
-                                        @enderror" {{ $editUser ? 'readonly' : '' }} name="username" value="{{ $editUser ? $editUser->username : "" }}"
+                                        @enderror" {{ $editUser ? 'readonly' : '' }} name="username" value="{{  old('username',optional($editUser)->username)}}"
                                             placeholder="Enter Username">
                                         @error('username')
                                             <p class="text-danger">{{ $message }}</p>
@@ -77,7 +77,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-9 col-12">
-                                        <input type="text" class="form-control p-1"  name="fullname" value="{{ $editUser ? $editUser->fullname : "" }}"
+                                        <input type="text" class="form-control p-1"  name="fullname" value="{{ old('fullname',optional($editUser)->fullname ) }}"
                                             placeholder="Enter Full Name">
                                     </div>
                                 </div>
@@ -90,7 +90,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-9 col-12">
-                                        <input type="email" value="{{ $editUser ? $editUser->email : "" }}" name="email" class="form-control p-1 @error('email') is-invalid
+                                        <input type="email" value="{{ old('email',optional($editUser)->email) }}" name="email" class="form-control p-1 @error('email') is-invalid
                                         @enderror" id="" placeholder="Enter Email">
                                        @error('email')
                                             <p class="text-danger">{{ $message }}</p>
@@ -104,11 +104,11 @@
                                     <div class="col-md-9 col-12">
                                         <select name="type" class="form-control p-1">
                                         @if($editUser)
-                                        <option value="customer">Customer</option>
+                                        <option value="customer">User</option>
                                         <option @selected( $editUser->type == 'admin' ) value="admin" >Admin</option>
 
                                         @else
-                                            <option value="customer">Customer</option>
+                                            <option value="customer">User</option>
                                             <option value="admin" >Admin</option>
                                         @endif
                                         <!-- <option value="staff">Staff</option>
@@ -143,7 +143,6 @@
                                     </div>
                                 </div>
 
-
                             </div>
                         </div>
 
@@ -153,8 +152,6 @@
                     </div>
                 </form>
             </div>
-
-
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
@@ -201,17 +198,14 @@
                                                     <tr role="row" class="odd" >
                                                         <td class="sorting_1">{{ $loop->iteration }}</td>
                                                         <td>
-                                                        
                                                         @if($user->picture)
                                                             <img class="tablepicture" src="{{ asset('storage/'.$user->picture) }}" alt="user profile picture">
                                                         @else
                                                             <img class="tablepicture" src="{{ asset('assets/admin/img/demoProfile.png') }}" alt="user profile picture">
                                                         @endif
-
                                                         </td>
                                                         <td>{{ $user->username }}</td>
                                                         <td>{{ $user->fullname ?? "None" }}</td>
-                                                        
                                                         <td>{{ $user->email }}</td>
                                                         <td>{{ $user->type }}</td>
                                                         <td class="d-flex justify-content-center">
@@ -229,16 +223,11 @@
                                                     </tr>
                                                 @empty
                                                     <p>there is no users</p>
-
                                                 @endforelse
-                                                    
-
-                                                    
                                                 </tbody>
                                             </table>
                                         </div>
                                     </div>
-
                                     <div class="row">
                                         <div class="col-12 d-flex justify-content-end me-2">
                                             @if ($allUsers->previousPageUrl())

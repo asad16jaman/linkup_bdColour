@@ -90,6 +90,8 @@
                             <th>Email</th>
                             <th>Area</th>
                             <th>Address</th>
+                            <th>Page</th>
+
                         </tr>
                         
                     </thead>
@@ -104,6 +106,13 @@
                                 <td>{{ $delear->email }}</td>
                                 <td>{{ $delear->area->name }}</td>
                                 <td>{{ $delear->address }}</td>
+                                <td>
+                                    @if($delear->website)
+                                        <a href="{{ $delear->website }}" target="_blank" style="font-size:20px"><i class="bi bi-link-45deg"></i></a>
+                                    @else
+                                        Not Found
+                                    @endif
+                                </td>
                             </tr>
                         
                         @endforeach

@@ -35,9 +35,9 @@
                    <p>Dashboard</p>
                 </a>
               </li>
-              <li class="nav-item {{ ($page == 'web') ? 'active' : "" }}">
+              <li class="nav-item {{ ($page == 'slider' || $page == 'management' || $page == 'users') ? 'active' : "" }}">
                 <a data-bs-toggle="collapse" href="#web">
-                  <i class="fas fa-images"></i>
+                  <i class="fas fa-globe"></i> 
                   <p>Web Content</p>
                   <span class="caret"></span>
                 </a>
@@ -46,7 +46,7 @@
                     <li>
                       <a href="{{ route('admin.slider') }}" style="padding: 5px 24px !important">
                         
-                        <p class="sub-item">Slider</p>
+                        <p class="{{ ($page == 'slider') ? 'sub-item' : 'pl' }}">Slider</p>
                       
                       </a>
                     </li>
@@ -54,15 +54,15 @@
                     <li>
                       <a href="{{ route('admin.management') }}" style="padding: 5px 24px !important">
                       
-                        <p class="sub-item">Management</p>
+                        <p class="{{ ($page == 'management') ? 'sub-item' : "pl" }}">Management</p>
                       </a>
                     </li>
 
                     @can('viewAny' ,Auth()->user()) 
-                    <li class="nav-item" >
+                    <li class="" >
                       <a href="{{ route('admin.users') }}" style="padding: 5px 24px !important">
                        
-                        <p class="sub-item">Users</p>
+                        <p class="{{ ($page == 'users') ? 'sub-item' : "pl" }}">Users</p>
                         
                       </a>
                     </li>
@@ -71,7 +71,7 @@
                 </div>
               </li>
 
-              <li class="nav-item {{ ($page == 'product') ? 'active' : "" }}">
+              <li class="nav-item {{ ($page == 'product' || $page == 'category') ? 'active' : "" }}">
                 <a data-bs-toggle="collapse" href="#productss">
                   <i class="fas fa-project-diagram"></i>
                   <p>Product</p>
@@ -82,7 +82,7 @@
                     <li>
                       <a href="{{ route('admin.category') }}" style="padding: 0px 24px !important">
                        
-                        <p class="sub-item">Category</p>
+                        <p class="{{ ($page == 'category') ? 'sub-item' : 'pl' }}">Category</p>
                       
                       </a>
                     </li>
@@ -90,7 +90,7 @@
                     <li>
                       <a href="{{ route('admin.product') }}" style="padding: 5px 24px !important">
                         
-                        <p class="sub-item">Product</p>
+                        <p class="{{ ($page == 'product') ? 'sub-item' : 'pl' }}">Product</p>
                       
                       </a>
                     </li>
@@ -113,7 +113,7 @@
                   <ul class="nav nav-collapse">
                     <li>
                       <a href="{{ route('admin.photogallery') }}" style="padding: 5px 24px !important">
-                        <span class="sub-item">Photo Gallery</span>
+                        <span class="{{ ($page == 'gallery') ? 'sub-item' : 'pl' }}">Photo Gallery</span>
                       </a>
                     </li>
                     <!-- <li>
@@ -127,14 +127,14 @@
               
               <li class="nav-item {{ ($page=='area') ? 'active' : ''}}">
                 <a href="{{ route('admin.area') }}">
-                  <i class="fas fa-handshake"></i>
+                  <i class="fas fa-map"></i> 
                   <p>Area</p>
                   <!-- <span class="badge badge-success">4</span> -->
                 </a>
               </li>
 
 
-              <li class="nav-item {{ ($page=='client') ? 'active' : ''}}">
+              <li class="nav-item {{ ($page=='approve' || $page=='pending') ? 'active' : ''}}">
                 <a data-bs-toggle="collapse" href="#dealers">
                   <i class="fas fa-handshake"></i>
                   <p>Dealers</p>
@@ -144,20 +144,15 @@
                   <ul class="nav nav-collapse">
                     <li>
                       <a href="{{ route('admin.delear') }}" style="padding: 5px 24px !important">
-                        <span class="sub-item">Approve Dealers</span>
+                        <span class="{{ ($page=='approve') ? 'sub-item' : 'pl' }}">Approve Dealers</span>
                       </a>
                     </li>
                     <li>
                       <a href="{{ route('admin.p_delear') }}" style="padding: 5px 24px !important">
-                        <span class="sub-item">Pending Dealers</span>
+                        <span class="{{ ($page=='pending') ? 'sub-item' : 'pl' }}">Pending Dealers</span>
                       </a>
                     </li>
                     
-                    <!-- <li>
-                      <a href="">
-                        <span class="sub-item">Video Gallery</span>
-                      </a>
-                    </li> -->
                   </ul>
                 </div>
               </li>
@@ -182,7 +177,7 @@
               </li>
               <li class="nav-item {{ ($page=='faq') ? 'active' : '' }}">
                 <a href="{{ route('admin.faq') }}">
-                  <i class="fas fa-info-circle"></i>
+                  <i class="fas fa-question-circle"></i> 
                   <p>Faq</p>
                 </a>
               </li>

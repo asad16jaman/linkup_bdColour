@@ -32,6 +32,7 @@
             background-color: #3c5236;
             color: #fff;
         }
+        
     </style>
 @endsection
 
@@ -62,7 +63,7 @@
                                     <div class="col-md-12 col-12">
                                         <label for="email2">Title :</label>
                                         <input type="text" class="form-control p-1 @error('title') is-invalid
-                                        @enderror" name="title" value="{{ $about ? $about->title : "" }}"
+                                        @enderror" name="title" value="{{  old('title',optional($about)->title) }}"
                                             placeholder="Enter About Company">
                                         @error('title')
                                             <p class="text-danger">{{ $message }}</p>
@@ -75,7 +76,7 @@
                                     <div class="col-md-12 col-12">
                                         <label for="email2">Video :</label>
                                         <input type="text" class="form-control p-1 @error('video') is-invalid
-                                        @enderror" name="video" value="{{ $about ? $about->video : "" }}"
+                                        @enderror" name="video" value="{{ old('video',optional($about)->video) }}"
                                             placeholder="Enter Video Link">
                                         @error('video')
                                             <p class="text-danger">{{ $message }}</p>
@@ -102,10 +103,10 @@
                             </div>
                         </div>
 
-                        <div class="row mb-2 mt-2">
+                        <div class="row mb-2 mt-2 ms-2">
                             
                             <label for="long_Description">about :</label>
-                            <textarea name="about" class="form-control"  id="description">{{ $about ? $about->about : "" }}</textarea>
+                            <textarea name="about" class="form-control  $error('about') is-invalid $enderror"  id="description">{{ old('about',optional($about)->about) }}</textarea>
                                     
                         </div>
 

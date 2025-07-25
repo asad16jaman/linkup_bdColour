@@ -24,7 +24,7 @@
 @endsection
 
 @section('pageside')
-    @include('admin.layout.sidebar', ['page' => 'client'])
+    @include('admin.layout.sidebar', ['page' => 'approve'])
 @endsection
 
 

@@ -63,7 +63,7 @@
                                     </div>
                                     <div class="col-md-9 col-12">
                                         <input type="text" class="form-control p-1 @error('title') is-invalid
-                                        @enderror"  name="title" value="{{ $editgallery ? $editgallery->title :"" }}"
+                                        @enderror"  name="title" value="{{ old('title',optional($editgallery)->title) }}"
                                             placeholder="Enter Full Name">
                                         @error('title')
                                             <p class="text-danger">{{ $message }}</p>
@@ -80,8 +80,7 @@
                                     </div>
                                     <div class="col-md-9 col-12">
                                         <textarea class="form-control @error('description') is-invalid
-                                        @enderror" name="description" placeholder="" id="comment" rows="3">{{ $editgallery ? $editgallery->description : '' }}</textarea>
-
+                                        @enderror" name="description" placeholder="" id="comment" rows="3">{{  old('description',optional($editgallery)->description)}}</textarea>
                                          @error('description')
                                             <p class="text-danger">{{ $message }}</p>
                                         @enderror

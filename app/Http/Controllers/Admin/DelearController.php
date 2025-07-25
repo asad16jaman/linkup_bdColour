@@ -2,55 +2,41 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use Exception;
 use App\Models\Area;
 use App\Models\Dealer;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\Controller;
 
 class DelearController extends Controller
 {
     //
 
     public function index(?int $id=null){
-
         $editItem = null;
         if($id != null){
             $editItem = Dealer::findOrFail($id);
         }
-
         $areas = Area::all();
-
         $search = request()->query("search",null);
         if($search){
             $alldelears = Dealer::with('area')->where('status','=','a')->where('name','like','%'.$search.'%')->orderBy("id","desc")->paginate(10);
         }else{
              $alldelears = Dealer::with('area')->where('status','=','a')->orderBy("id","desc")->paginate(10);
         }
-
-       
-
-        // return response()->json($alldelears);
-
         return view("admin.delear",compact("alldelears","editItem",'areas'));
     }
 
 
     public function pendingDealers(){
-
-        
-        
-
         $search = request()->query("search",null);
         if($search){
             $alldelears = Dealer::with('area')->where('status','=','p')->where('name','like','%'.$search.'%')->orderBy("id","desc")->paginate(10);
         }else{
              $alldelears = Dealer::with('area')->where('status','=','p')->orderBy("id","desc")->paginate(10);
         }
-
-        // return response()->json($alldelears);
-
         return view("admin.panding",compact("alldelears"));
     }
 
@@ -60,14 +46,12 @@ class DelearController extends Controller
             // return response()->json(['id' => $id],200);
             Dealer::findOrFail($id)->update(["status"=> "a"]);
             return redirect()->back()->with('success',"successfully Approved");
-        }catch (\Exception $e){
+        }catch (Exception $e){
             return redirect()->back()->with('danger',"There is some problem");
         }
         
 
     }
-
-
 
     public function store(Request $request,?int $id=null){
 
@@ -83,9 +67,7 @@ class DelearController extends Controller
         $data = $request->only(['name','phone','address','area_id','phone2','company_name','email','status','website']);
 
         try{
-
             if($id != null){
-
                 Dealer::where('id',$id)->update($data);
 
                  if ($request->route()->named('admin.delear')) {
@@ -93,18 +75,13 @@ class DelearController extends Controller
                 }else{
                     return redirect()->route('admin.p_delear',['page'=>$request->query('page'),'search'=>$request->query('search')])->with('  success','successfully edited');
                 }
-                
-
             }
-
             Dealer::create($data);
             return redirect()->back()->with('success','successfully Created');
 
-        }catch(\Exception $e){
-
-            Log::error($e->getMessage());
-            return redirect()->back()->with('error', "There is some problem It will fix soon");
-
+        }catch(Exception $e){
+            Log::error("this message is from : ".__CLASS__."Line is : ".__LINE__." messages is ".$e->getMessage());
+            return redirect()->route('error');
         }
 
     }
@@ -112,14 +89,11 @@ class DelearController extends Controller
     public function destroy(int $id){
 
         try{
-
-            Dealer::find($id)->delete();
+            Dealer::findOrFail($id)->delete();
             return redirect()->back()->with("success","Successfully Deleted");
-
-        }catch (\Exception $e){
-
-            Log::error($e->getMessage());
-            return redirect()->back()->with('error', "There is some problem It will fix soon");
+        }catch(Exception $e){
+            Log::error("this message is from : ".__CLASS__."Line is : ".__LINE__." messages is ".$e->getMessage());
+            return redirect()->route('error');
         }
 
     }

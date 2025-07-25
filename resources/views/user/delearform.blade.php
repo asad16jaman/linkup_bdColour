@@ -109,6 +109,13 @@
                   
                 </div>
 
+                <div class="col-md-12 ">
+                  <input type="text" class="form-control  @error('website') is-invalid @enderror" value="{{ old('website') }}" name="website" placeholder="Your Website Link">
+                  @error('website')
+                    <p class="text-danger">{{ $message }}</p>
+                  @enderror
+                </div>
+
                 <div class="col-md-12">
                   <textarea class="form-control  @error('address') is-invalid @enderror" name="address" rows="3" placeholder="Enter Address" >{{ old('address') }}</textarea>
                   @error('address')

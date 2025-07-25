@@ -41,7 +41,6 @@ Route::post("/delearform",[HomeController::class,"storeDealer"])->name("delearfo
 
 
 Route::prefix('admin')->group(function(){
-
     Route::get('/login',[DashboardController::class,'login'])->name('admin.login');
     Route::post('/login',[DashboardController::class,'authenticate'])->name('admin.login');
     Route::get('/error',[DashboardController::class,'errorpage'])->name('error');
@@ -115,12 +114,12 @@ Route::group(['prefix'=> '/admin','middleware'=>'checkAdminAuth','as'=>'admin.']
     Route::post('/faq',[FaqController::class,'store'])->name('faq');
     Route::post('/faq/{id}/delete',[FaqController::class,'destroy'])->name('faq.delete');
 
-    // faq hare
+    // Area hare
     Route::get('/area',[AreaController::class,'index'])->name('area');
     Route::post('/area',[AreaController::class,'store'])->name('area');
     Route::post('/area/{id}/delete',[AreaController::class,'destroy'])->name('area.delete');
 
-    //dealer faq hare
+   
     //handling apprived dealer
     Route::get('/delear/aproved/{id?}',[DelearController::class,'index'])->name('delear');
     Route::post('/delear/aproved/{id?}',[DelearController::class,'store'])->name('delear');

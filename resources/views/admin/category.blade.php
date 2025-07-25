@@ -33,7 +33,7 @@
 @endsection
 
 @section('pageside')
-  @include('admin.layout.sidebar',['page' => 'product'])
+  @include('admin.layout.sidebar',['page' => 'category'])
 @endsection
 
 

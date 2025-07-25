@@ -37,7 +37,7 @@
 @endsection
 
 @section('pageside')
-  @include('admin.layout.sidebar',['page' => 'web'])
+  @include('admin.layout.sidebar',['page' => 'slider'])
 @endsection
 
 @section('bodyContent')

@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use Exception;
 use App\Models\Area;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class AreaController extends Controller
 {
@@ -21,7 +22,6 @@ class AreaController extends Controller
 
         $request->validate([
             'name' => 'required',
-
         ]);
 
         $data = $request->only(['name']);
@@ -29,8 +29,9 @@ class AreaController extends Controller
         try{
             Area::create($data);
             return redirect()->back()->with('success','Successfully created.');
-        }catch(\Exception $e){
-            return redirect()->back()->with('error', $e);
+        }catch(Exception $e){
+            Log::error("this message is from : ".__CLASS__."Line is : ".__LINE__." messages is ".$e->getMessage());
+            return redirect()->route('error');
         }
     }
 
@@ -38,10 +39,11 @@ class AreaController extends Controller
     public function destroy($id){
 
         try{
-            Area::find($id)->delete();
+            Area::findOrFail($id)->delete();
             return redirect()->back()->with('success', "Successfully Deleted");
-        }catch(\Exception $e){
-            return redirect()->back()->with('error', "There is some problem");
+        }catch(Exception $e){
+            Log::error("this message is from : ".__CLASS__."Line is : ".__LINE__." messages is ".$e->getMessage());
+            return redirect()->route('error');
         }
         
     }
